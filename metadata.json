@@ -1,0 +1,13 @@
+{
+  "name": "サスティナブルガレージ",
+  "description": "引取りから出荷までの全工程を可視化し、作業評価を最適化する倉庫・生産管理システム。管理者向けダッシュボードと従業員向けモバイルUIを完備。",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "inventory_management",
+    "production_tracking",
+    "employee_evaluation",
+    "excel_integration"
+  ]
+}

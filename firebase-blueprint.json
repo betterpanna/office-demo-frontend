@@ -1,0 +1,104 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "System users (Admin, Worker, Collector)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "worker", "collector"] },
+        "base": { "type": "string" },
+        "branchId": { "type": "string" },
+        "positionId": { "type": "string" },
+        "avatar": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "InventoryItem": {
+      "title": "Inventory Item",
+      "description": "Parts in stock or being processed",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "managementNumber": { "type": "string" },
+        "partNumber": { "type": "string" },
+        "name": { "type": "string" },
+        "status": { "type": "string" },
+        "rank": { "type": "string" },
+        "carModel": { "type": "string" },
+        "carYear": { "type": "string" },
+        "category": { "type": "string" },
+        "location": { "type": "string" },
+        "arrivalDate": { "type": "string" },
+        "price": { "type": "number" },
+        "images": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["id", "managementNumber", "name", "status"]
+    },
+    "Collection": {
+      "title": "Collection",
+      "description": "Collection requests from customers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "collectionNumber": { "type": "string" },
+        "customerName": { "type": "string" },
+        "status": { "type": "string" },
+        "collectionDate": { "type": "string" },
+        "totalAmount": { "type": "number" }
+      },
+      "required": ["id", "collectionNumber", "customerName", "status"]
+    },
+    "Branch": {
+      "title": "Branch",
+      "description": "Business locations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "address": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "Receipt": {
+      "title": "Receipt",
+      "description": "Issued receipts after collection",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "collectionId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "collectorName": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "issuedAt": { "type": "string" },
+        "itemsCount": { "type": "number" },
+        "signatureData": { "type": "string" }
+      },
+      "required": ["id", "collectionId", "customerName", "totalAmount", "issuedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/inventory/{itemId}": {
+      "schema": "InventoryItem",
+      "description": "Inventory items"
+    },
+    "/collections/{collectionId}": {
+      "schema": "Collection",
+      "description": "Collection records"
+    },
+    "/receipts/{receiptId}": {
+      "schema": "Receipt",
+      "description": "Issued receipts"
+    },
+    "/branches/{branchId}": {
+      "schema": "Branch",
+      "description": "Branch master data"
+    }
+  }
+}
